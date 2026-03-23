@@ -5,12 +5,18 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.x'
-      - run: flutter build windows --release
-      - uses: actions/upload-artifact@v3
+      - run: |
+          flutter channel main
+      - run: |
+          dart pub global activate flutter_distributor
+          $env:Path += ";$HOME\\.pub-cache\\bin"
+          $Version = (Select-String -Path pubspec.yaml -Pattern '^version:\s*([0-9]+\.[0-9]+\.[0-9]+)').Matches[0].Groups[1].Value
+          powershell -ExecutionPolicy Bypass -File scripts/build_release_windows.ps1 $Version
+      - uses: actions/upload-artifact@v4
         with:
-          name: windows-build
-          path: build/windows/x64/runner/Release/
+          name: windows-exe
+          path: dist/**/*.exe

@@ -1,8 +1,8 @@
-name: Build Linux
+name: Build macOS
 on: push
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -10,13 +10,11 @@ jobs:
           flutter-version: '3.x'
       - run: |
           flutter channel main
-          sudo apt-get update
-          sudo apt-get install -y clang cmake ninja-build libgtk-3-dev
           dart pub global activate flutter_distributor
           export PATH="$PATH":"$HOME/.pub-cache/bin"
           VERSION="$(awk '/^version:/{split($2,a,"+"); print a[1]}' pubspec.yaml)"
-          bash scripts/build_release_linux.sh "$VERSION"
+          bash scripts/build_release_macos.sh "$VERSION"
       - uses: actions/upload-artifact@v4
         with:
-          name: linux-deb
-          path: dist/**/*.deb
+          name: macos-dmg
+          path: dist/**/*.dmg
