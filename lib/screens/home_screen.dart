@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:multi_split_view/multi_split_view.dart';
 
+import 'formula_table_screen.dart';
+
 enum AppSection { formulaTable, deviceExplorer }
 
 class HomeScreen extends StatefulWidget {
@@ -82,17 +84,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildMainPanel(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: _section == AppSection.formulaTable
-          ? _SectionPlaceholder(
-              title: 'Formula Table',
-              subtitle: 'UI and solver wiring will be added in Step 4.',
-            )
-          : _SectionPlaceholder(
-              title: 'Device Explorer',
-              subtitle: 'LUT loading and charting will be added in Step 6.',
-            ),
+    if (_section == AppSection.formulaTable) {
+      return const FormulaTableScreen();
+    }
+
+    return const Padding(
+      padding: EdgeInsets.all(20),
+      child: _SectionPlaceholder(
+        title: 'Device Explorer',
+        subtitle: 'LUT loading and charting will be added in Step 6.',
+      ),
     );
   }
 }
