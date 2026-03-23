@@ -10,6 +10,7 @@ jobs:
           flutter-version: '3.x'
       - run: |
           flutter channel main
+          npm install -g appdmg
           dart pub global activate flutter_distributor
           export PATH="$PATH":"$HOME/.pub-cache/bin"
           VERSION="$(awk '/^version:/{split($2,a,"+"); print a[1]}' pubspec.yaml)"

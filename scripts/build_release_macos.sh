@@ -8,6 +8,11 @@ if ! command -v flutter_distributor >/dev/null 2>&1; then
   exit 1
 fi
 
+if ! command -v appdmg >/dev/null 2>&1; then
+  echo "appdmg not found. Install with: npm install -g appdmg"
+  exit 1
+fi
+
 flutter_distributor package \
   --platform macos \
   --targets dmg \
