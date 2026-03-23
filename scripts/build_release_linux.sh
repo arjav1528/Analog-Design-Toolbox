@@ -11,6 +11,6 @@ fi
 flutter_distributor package \
   --platform linux \
   --targets deb \
-  --artifact-name "adt-${VERSION}"
+  --artifact-name "adt-${VERSION}.deb"
 
 echo "Done. Debian package available under dist/"

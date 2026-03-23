@@ -20,3 +20,4 @@ jobs:
         with:
           name: linux-deb
           path: dist/**/*.deb
+          if-no-files-found: error

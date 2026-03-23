@@ -16,6 +16,6 @@ fi
 flutter_distributor package \
   --platform macos \
   --targets dmg \
-  --artifact-name "adt-${VERSION}"
+  --artifact-name "adt-${VERSION}.dmg"
 
 echo "Done. DMG available under dist/"

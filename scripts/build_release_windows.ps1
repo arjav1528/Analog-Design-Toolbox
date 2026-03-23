@@ -9,6 +9,6 @@ if (-not (Get-Command flutter_distributor -ErrorAction SilentlyContinue)) {
 flutter_distributor package `
   --platform windows `
   --targets exe `
-  --artifact-name adt-setup-$Version
+  --artifact-name adt-setup-$Version.exe
 
 Write-Host "Done. EXE installer available under dist\"

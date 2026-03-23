@@ -19,3 +19,4 @@ jobs:
         with:
           name: macos-dmg
           path: dist/**/*.dmg
+          if-no-files-found: error
