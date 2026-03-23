@@ -48,13 +48,17 @@ class ParamInputRow extends ConsumerWidget {
             flex: 4,
             child: isEditable
                 ? UnitInputField(
-                    key: ValueKey('${paramId.name}-${userSi ?? 'null'}'),
-                    initialValue: hasUserValue
+                    value: hasUserValue
                         ? formatEngineering(userSi, meta.toSiFactor)
                         : '',
                     unit: meta.unit,
                     onChanged: (raw) {
-                      final parsed = double.tryParse(raw.trim());
+                      final text = raw.trim();
+                      if (text.isEmpty) {
+                        notifier.setParam(paramId, null);
+                        return;
+                      }
+                      final parsed = double.tryParse(text);
                       notifier.setParam(paramId, parsed);
                     },
                   )
