@@ -41,9 +41,24 @@ class DeviceExplorerScreen extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 24),
-            const Expanded(
+            Expanded(
               child: Center(
-                child: Text('Load a CSV LUT to get started.'),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text('Load a CSV LUT to get started.'),
+                    if (lutState.error != null) ...[
+                      const SizedBox(height: 12),
+                      Text(
+                        lutState.error!,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -89,6 +104,13 @@ class DeviceExplorerScreen extends ConsumerWidget {
               ),
             ],
           ),
+          if (lutState.error != null) ...[
+            const SizedBox(height: 8),
+            Text(
+              lutState.error!,
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
+          ],
           const SizedBox(height: 12),
           Expanded(
             child: MultiSplitView(

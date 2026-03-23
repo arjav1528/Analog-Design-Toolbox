@@ -73,6 +73,15 @@ class LutNotifier extends StateNotifier<LutState> {
     state = state.copyWith(loading: true, clearError: true);
     try {
       final data = await _loader.loadFromFilePath(path);
+      if (data.isEmpty) {
+        state = state.copyWith(
+          data: null,
+          filePath: path,
+          loading: false,
+          error: 'No valid LUT rows found in the selected file.',
+        );
+        return;
+      }
       state = state.copyWith(
         data: data,
         filePath: path,

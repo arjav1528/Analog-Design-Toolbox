@@ -31,7 +31,7 @@ class ParamInputRow extends ConsumerWidget {
 
     final valueText = hasDerivedValue
         ? formatEngineering(derivedSi, meta.toSiFactor)
-        : '[AUTO-PLOT]';
+        : 'AUTO-PLOT';
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -67,7 +67,22 @@ class ParamInputRow extends ConsumerWidget {
                       color: Theme.of(context).colorScheme.surfaceContainerHigh,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Text('$valueText ${meta.unit}'),
+                    child: hasDerivedValue
+                        ? Tooltip(
+                            message: state.result.derivedVia[paramId] ?? '',
+                            child: Text('$valueText ${meta.unit}'),
+                          )
+                        : Align(
+                            alignment: Alignment.centerLeft,
+                            child: Chip(
+                              label: Text(valueText),
+                              backgroundColor: Colors.orange.withValues(
+                                alpha: 0.20,
+                              ),
+                              side: const BorderSide(color: Colors.orange),
+                              visualDensity: VisualDensity.compact,
+                            ),
+                          ),
                   ),
           ),
           const SizedBox(width: 12),
