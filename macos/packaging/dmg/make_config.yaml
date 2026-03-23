@@ -1,0 +1,15 @@
+title: ADT
+format: ULFO
+window:
+  size:
+    width: 640
+    height: 400
+contents:
+  - x: 180
+    y: 170
+    type: file
+    path: adt.app
+  - x: 460
+    y: 170
+    type: link
+    path: /Applications

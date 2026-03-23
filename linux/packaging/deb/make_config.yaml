@@ -1,0 +1,11 @@
+display_name: ADT
+package_name: adt
+maintainer:
+  name: ADT Team
+  email: dev@example.com
+priority: optional
+section: utils
+installed_size: 30000
+essential: false
+categories:
+  - Utility
