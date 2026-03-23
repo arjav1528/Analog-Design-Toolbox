@@ -12,14 +12,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:adt/app.dart';
 
 void main() {
-  testWidgets('Home shell renders navigation', (WidgetTester tester) async {
+  testWidgets('Home shows formula table only', (WidgetTester tester) async {
     tester.view.physicalSize = const Size(1920, 1080);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(tester.view.reset);
 
     await tester.pumpWidget(const ProviderScope(child: App()));
 
-    expect(find.text('Formula Table'), findsNWidgets(2));
-    expect(find.text('Device Explorer'), findsOneWidget);
+    expect(find.text('Formula Table'), findsOneWidget);
+    expect(find.text('Device Explorer'), findsNothing);
   });
 }
